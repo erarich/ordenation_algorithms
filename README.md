@@ -33,7 +33,7 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Start the server:
+Start the project:
 ```console
-python src/main.py
+python src/main.py [tests_number] [csv_file_name] [algorithm]
 ```
