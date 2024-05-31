@@ -1,14 +1,24 @@
 import sys
 sys.setrecursionlimit(200000)
 
-
 def quick_sort(arr):
     comparisons = 0
     swaps = 0
 
+    def median_of_three(low, high):
+        mid = (low + high) // 2
+        if arr[low] > arr[mid]:
+            arr[low], arr[mid] = arr[mid], arr[low]
+        if arr[low] > arr[high]:
+            arr[low], arr[high] = arr[high], arr[low]
+        if arr[mid] > arr[high]:
+            arr[mid], arr[high] = arr[high], arr[mid]
+        arr[mid], arr[high] = arr[high], arr[mid]
+        return arr[high]
+
     def partition(low, high):
         nonlocal comparisons, swaps
-        pivot = arr[high]
+        pivot = median_of_three(low, high)
         i = low - 1
         for j in range(low, high):
             comparisons += 1
@@ -28,3 +38,22 @@ def quick_sort(arr):
 
     sort(0, len(arr) - 1)
     return arr, comparisons, swaps
+
+# Test with sorted and random lists
+sorted_list = list(range(100000))
+random_list = sorted_list.copy()
+import random
+random.shuffle(random_list)
+
+# Measure time for sorted list
+import time
+start_time = time.time()
+quick_sort(sorted_list)
+end_time = time.time()
+print("Time for sorted list:", (end_time - start_time) * 1000, "ms")
+
+# Measure time for random list
+start_time = time.time()
+quick_sort(random_list)
+end_time = time.time()
+print("Time for random list:", (end_time - start_time) * 1000, "ms")
