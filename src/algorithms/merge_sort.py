@@ -1,74 +1,49 @@
+def merge_sort(arr):
+    comparisons = 0
+    swaps = 0
 
-# Programa Python para implementação de MergeSort
+    def merge(left, right):
+        nonlocal comparisons, swaps
+        merged = []
+        l = r = 0
+        while l < len(left) and r < len(right):
+            comparisons += 1
+            if left[l] < right[r]:
+                merged.append(left[l])
+                l += 1
+            else:
+                merged.append(right[r])
+                r += 1
+        merged.extend(left[l:])
+        merged.extend(right[r:])
+        return merged
 
-# Mescla dois subarrays de arr[].
-# O primeiro subarray é arr[l..m]
-# O segundo subarray é arr[m+1..r]
+    def sort(arr):
+        if len(arr) <= 1:
+            return arr
+        mid = len(arr) // 2
+        left = sort(arr[:mid])
+        right = sort(arr[mid:])
+        return merge(left, right)
 
-def merge(arr, l, m, r):
-    n1 = m - l + 1
-    n2 = r - m
+    sorted_arr = sort(arr)
+    return sorted_arr, comparisons, swaps
 
-    # cria arrays temporárias
-    L = [0] * (n1)
-    R = [0] * (n2)
+# Test with sorted and random lists
+sorted_list = list(range(100000))
+random_list = sorted_list.copy()
+import random
+random.shuffle(random_list)
 
-    # Copia dados para arrays temporários L[] e R[]
-    for i in range(0, n1):
-        L[i] = arr[l + i]
+# Measure time for sorted list
+import time
+start_time = time.time()
+merge_sort(sorted_list)
+end_time = time.time()
+print("Time for sorted list:", (end_time - start_time) * 1000, "ms")
 
-    for j in range(0, n2):
-        R[j] = arr[m + 1 + j]
-
-   # Mesclar os arrays temporários de volta em arr[l..r]
-    i = 0  # Índice inicial do primeiro subarray
-    j = 0  # Índice inicial do segundo subarray
-    k = l  # Índice inicial do subarray mesclado
-
-    while i < n1 and j < n2:
-        if L[i] <= R[j]:
-            arr[k] = L[i]
-            i += 1
-        else:
-            arr[k] = R[j]
-            j += 1
-        k += 1
-
-    # Copie os elementos restantes de L[], se houver algum
-    while i < n1:
-        arr[k] = L[i]
-        i += 1
-        k += 1
-
-    # # Copie os elementos restantes de L[], se houver algum
-    while j < n2:
-        arr[k] = R[j]
-        j += 1
-        k += 1
-
-# l é para o índice esquerdo e r é o índice direito da submatriz de arr a ser classificada
-
-
-def merge_sort(arr, l, r):
-    if l < r:
-
-        # O mesmo que (l+r)//2, mas evita overflow para l e h grandes
-        m = l+(r-l)//2
-
-        # Classifique a primeira e a segunda metades
-        merge_sort(arr, l, m)
-        merge_sort(arr, m+1, r)
-        merge(arr, l, m, r)
-
-
-# # Código do driver para testar acima
-# arr = [12, 11, 13, 5, 6, 7]
-# n = len(arr)
-# print("Given array is")
-# for i in range(n):
-#     print("%d" % arr[i], end=" ")
-
-# mergeSort(arr, 0, n-1)
-# print("\n\nSorted array is")
-# for i in range(n):
-#     print("%d" % arr[i], end=" ")
+# Measure time for random list
+start_time = time.time()
+merge_sort(random_list)
+end_time = time.time()
+print("Time for random list:", (end_time - start_time) * 1000, "ms")
