@@ -1,3 +1,8 @@
+# Authors:
+# # Benedito Jaime (GitHub: beneX90)
+# # Daniel Vinicius (GitHub: DanielVinicius00)
+# # Érick Santos Marçal (GitHub: erarich)
+
 import time
 import argparse
 import csv
@@ -20,6 +25,9 @@ def test_sorting_algorithm(algorithm, data):
         'comparisons': comparisons,
         'swaps': swaps,
         'time': (end_time - start_time) * 1000
+        #'time': (end_time - start_time) Retorna em segundos
+
+
     }
 
 
@@ -78,12 +86,12 @@ def main():
                     algorithm_name,
                     results['comparisons'],
                     results['swaps'],
-                    f"{results['time']:.6f}"  # ensuring six decimal places
+                    results['time']
                 ]
 
                 append_to_csv(output_file, row)
                 print(
-                    f"Test completed for size {size} and type {list_type} using {algorithm_name} with Comparisons: {results['comparisons']}, Swaps: {results['swaps']}, Time: {results['time']:.6f}ms")
+                    f"Test completed for size {size} and type {list_type} using {algorithm_name} with Comparisons: {results['comparisons']}, Swaps: {results['swaps']}, Time: {results['time']}ms")
 
 
 if __name__ == "__main__":
