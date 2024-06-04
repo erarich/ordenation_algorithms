@@ -1,17 +1,15 @@
-
-def bubble_sort(a):
-    n = len(a)
-    for j in range(n - 1, 0, -1):
-        for k in range(j):
-            if a[k + 1] < a[k]:
-                a[k], a[k + 1] = a[k + 1], a[k]
-
-
-# # Exemplo de uso:
-# vetor = [64, 34, 25, 12, 22, 11, 90]
-
-# # Ordenar o vetor usando Bubble Sort
-# bubble_sort(vetor)
-
-# # Imprimir o vetor ordenado
-# print("Vetor ordenado é:", vetor)
+def bubble_sort(arr):
+    n = len(arr)
+    comparisons = 0
+    swaps = 0
+    for i in range(n-1):
+        swapped = False
+        for j in range(0, n-i-1):
+            comparisons += 1
+            if arr[j] > arr[j + 1]:
+                swapped = True
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swaps += 1
+        if not swapped:
+            break
+    return arr, comparisons, swaps

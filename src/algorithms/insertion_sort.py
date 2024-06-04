@@ -1,22 +1,18 @@
-
 def insertion_sort(a):
+    comparisons = 0
+    swaps = 0
     for i in range(1, len(a)):
         key = a[i]
         j = i - 1
-        while j >= 0 and key < a[j]:
-            a[j + 1] = a[j]
-            j -= 1
+        while j >= 0:
+            comparisons += 1
+            if key < a[j]:
+                a[j + 1] = a[j]
+                swaps += 1
+                j -= 1
+            else:
+                break
         a[j + 1] = key
-
-
-# # Vetor com 10 elementos
-# vetor = [29, 10, 14, 37, 13, 45, 19, 7, 12, 33]
-
-# # Imprimir o vetor não ordenado
-# print("Vetor não ordenado:", vetor)
-
-# # Ordenar o vetor usando Insertion Sort
-# insertion_sort(vetor)
-
-# # Imprimir o vetor ordenado
-# print("Vetor ordenado é:", vetor)
+        if j != i - 1:
+            swaps += 1  # Para a colocação final da chave
+    return a, comparisons, swaps
