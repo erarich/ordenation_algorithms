@@ -24,8 +24,8 @@ def test_sorting_algorithm(algorithm, data):
         'sorted_array': sorted_arr,
         'comparisons': comparisons,
         'swaps': swaps,
-        #'time': (end_time - start_time) * 1000
-        'time': (end_time - start_time)
+        'time': (end_time - start_time) * 1000
+        #'time': (end_time - start_time) Retorna em segundos
 
 
     }
