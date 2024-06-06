@@ -28,22 +28,3 @@ def merge_sort(arr):
 
     sorted_arr = sort(arr)
     return sorted_arr, comparisons, swaps
-
-# Test with sorted and random lists
-sorted_list = list(range(100000))
-random_list = sorted_list.copy()
-import random
-random.shuffle(random_list)
-
-# Measure time for sorted list
-import time
-start_time = time.time()
-merge_sort(sorted_list)
-end_time = time.time()
-print("Time for sorted list:", (end_time - start_time) * 1000, "ms")
-
-# Measure time for random list
-start_time = time.time()
-merge_sort(random_list)
-end_time = time.time()
-print("Time for random list:", (end_time - start_time) * 1000, "ms")
